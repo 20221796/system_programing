@@ -10,8 +10,10 @@ char* get(kvs_t* kvs, const char* key)
 			break;
 	}
 	
-	char* value = (char*)malloc(sizeof(char)*100);
+	if (current->key != key) return "-1";
 
+	char* value = (char*)malloc(sizeof(char)*100);
+	
 	if(!value){
 		printf("Failed to malloc\n");
 		return NULL;
