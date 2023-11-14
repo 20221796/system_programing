@@ -1,3 +1,4 @@
+//static_main.c
 #include "kvs.h"
 
 int main()
@@ -8,7 +9,6 @@ int main()
 		printf("Failed to open kvs\n");
 		return -1;
 	}
-
 
 	// workload execution  
 	
@@ -29,12 +29,12 @@ int main()
 	char key[100];
 	char value[100];
 
-	while(!feop(query_fp)) {
-		fscanf(query_fp, "%s,%s,%s\n",&type,&key,&value);
+	while(!feof(query_fp)) {
+		fscanf(query_fp, "%3[^,],%99[^,],%99[^\n]\n", type, key, value);
 		
-		if (type=="set")
+		if (strcmp(type, "set") == 0)
 			set(kvs, key, value);
-		else if (type=="get")
+		else if (strcmp(type, "get") == 0)
 			fprintf(answer_fp, "%s\n", get(kvs, key));
 	}
 
