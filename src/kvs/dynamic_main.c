@@ -42,20 +42,22 @@ int main() {
     char type[4];
     char key[100];
     char value[100];
+
+	if(!feof(query_fp)) //for first time
+	{
+		fscanf(query_fp, "%3[^,],%99[^,],%99[^\n]\n", type, key, value);
+		fprintf(answer_fp, "%s", get(kvs, key));
+	}
+
 	while(!feof(query_fp)) {
 		fscanf(query_fp, "%3[^,],%99[^,],%99[^\n]\n", type, key, value);
-        
+		
 		if (strcmp(type, "set") == 0)
 			set(kvs, key, value);
 		else if (strcmp(type, "get") == 0)
-			fprintf(answer_fp, "%s\n", get(kvs, key));
+			fprintf(answer_fp, "\n%s", get(kvs, key));
 	}
-
-    if (dlclose(handle) < 0) {
-		fprintf(stderr, "%s\n", dlerror());
-		exit(1);
-	}
-
+    
     fclose(query_fp);
     fclose(answer_fp);
     close(kvs);

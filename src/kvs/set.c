@@ -13,6 +13,7 @@ int set(kvs_t* kvs, const char* key, const char* value) {
             return -1;
         }
 
+        
         data->next = NULL;
         strcpy(data->key, key);
         strcpy(data->value, value);

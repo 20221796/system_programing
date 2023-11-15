@@ -4,6 +4,7 @@
 char* get(kvs_t* kvs, const char* key)
 {
 	/* do program here */
+
 	node_t* current = kvs->db;
 
 	while(1) {
@@ -14,7 +15,7 @@ char* get(kvs_t* kvs, const char* key)
 		current = current->next;
 	}
 
-	char* value = (char*)malloc(sizeof(char)*100);
+	char* value = (char*)malloc(sizeof(char)*20);
 	if(!value){
 		printf("Failed to malloc\n");
 		return NULL;
