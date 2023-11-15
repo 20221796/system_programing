@@ -20,10 +20,10 @@ int main()
 	FILE* query_fp = fopen("query.dat", "r");
 	FILE* answer_fp = fopen("answer.dat", "w");
 	
-	if(!query_fp) {
-		printf("파일 열기 실패\n");
-		return -1;
-	}
+    if (!query_fp || !answer_fp) {
+        printf("파일 열기 실패\n");
+        return -1;
+    }
 
 	char type[4];
 	char key[100];
@@ -37,7 +37,9 @@ int main()
 		else if (strcmp(type, "get") == 0)
 			fprintf(answer_fp, "%s\n", get(kvs, key));
 	}
-
+	
+	fclose(query_fp);
+    fclose(answer_fp);
 	close(kvs);
 	
 	return 0;
