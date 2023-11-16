@@ -13,13 +13,6 @@ int main()
 		return -1;
 	}
 
-	// workload execution  
-	
-	// 1) 	file read 
-	// 2) 	if set, insert (key, value) into kvs.
-	// 		if get, seach the key in kvs and return the value. 
-	//		Return -1 if the key is not found  
-
 	FILE* query_fp = fopen("query.dat", "r");
 	FILE* answer_fp = fopen("answer.dat", "w");
 	
