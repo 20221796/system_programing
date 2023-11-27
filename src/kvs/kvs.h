@@ -9,13 +9,11 @@ struct node {
 };	
 typedef struct node node_t;
 
-
 struct kvs{
 	struct node* db; // database
 	int items; // number of data
 };
 typedef struct kvs kvs_t; 
-
 
 kvs_t* open();
 int close(kvs_t* kvs); // free all memory space 

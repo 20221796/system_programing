@@ -1,12 +1,15 @@
 //set.c
 #include "kvs.h"
 
-//data를 뒤가 아니라 앞에 넣어서 공간을 약간 더 쓰는 대신 속도 증가
+//기존 방식에서는 current의 뒤에 data를 넣어서 db의 길이가 길어질 때마다 실행 시간이 증가
+//같은 key값이 나왔을 때 update도 따로 해줘야해서 시간이 더더욱 오래걸렸음 
+//data를 뒤가 아니라 앞에 넣어서 공간을 더 쓰는 대신 속도 증가
+
 int set(kvs_t* kvs, const char* key, const char* value) {
     node_t* current = kvs->db;
     node_t* data = (node_t*)malloc(sizeof(node_t));
     data->value = (char*)malloc((strlen(value) + 1) * sizeof(char));
-    
+
     if (!data || !(data->value)) {
         printf("메모리 할당 실패\n");
         return -1;
@@ -19,7 +22,7 @@ int set(kvs_t* kvs, const char* key, const char* value) {
     data->next = current;
     kvs->items++;
 }
- 
+
 // int set(kvs_t* kvs, const char* key, const char* value) {
 //     node_t* current = kvs->db;
 	
